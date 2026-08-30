@@ -1,0 +1,38 @@
+---
+import { Terminal, Zap, FolderOpen, HardDrive } from "lucide-astro";
+
+const features = [
+  {
+    icon: Terminal,
+    label: "Vim Key-binds",
+  },
+  {
+    icon: Zap,
+    label: "Fast Note Taking",
+  },
+  {
+    icon: FolderOpen,
+    label: "Project Management",
+  },
+  {
+    icon: HardDrive,
+    label: "Fully Local",
+  },
+];
+---
+
+<div class="bg-gray-900 flex flex-col items-center">
+  <div class="w-full px-8 py-12 flex flex-col gap-10 max-w-[600px]">
+    <h3 class="text-lg font-semibold text-white">Features</h3>
+    <div class="flex justify-between gap-4">
+      {features.map(({ icon: Icon, label }) => (
+        <div class="flex-1 flex flex-col items-center gap-3">
+          <div class="w-full aspect-square rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+            <Icon size={28} class="text-white/80" />
+          </div>
+          <p class="text-white/70 text-xs text-center leading-snug">{label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
