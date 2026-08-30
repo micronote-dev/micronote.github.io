@@ -1,0 +1,48 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/index/header.astro";
+import Footer from "../../components/index/footer.astro";
+import { getAllDocs } from "../../lib/docs";
+
+const docs = await getAllDocs();
+const first = docs[0];
+---
+
+<Layout>
+    <Header />
+    <div class="bg-gray-900 min-h-screen flex flex-col">
+        <div class="flex flex-1 max-w-[1100px] mx-auto w-full">
+
+            <!-- Sidebar -->
+            <aside class="w-56 shrink-0 border-r border-white/8 py-10 px-4 sticky top-0 h-screen overflow-y-auto">
+                <p class="text-white/30 text-xs font-semibold uppercase tracking-wider px-2 mb-3">Documentation</p>
+                <nav class="flex flex-col gap-0.5">
+                    {docs.map((doc) => (
+                        <a
+                            href={`/docs/${doc.slug}`}
+                            class="px-2 py-1.5 rounded-md text-sm text-white/50 hover:text-white hover:bg-white/5 transition-colors"
+                        >
+                            {doc.meta.title}
+                        </a>
+                    ))}
+                </nav>
+            </aside>
+
+            <!-- Redirect to first doc -->
+            <main class="flex-1 px-12 py-10 flex items-center justify-center">
+                {first ? (
+                    <div class="text-center flex flex-col items-center gap-4">
+                        <p class="text-white/30 text-sm">Select a page from the sidebar, or</p>
+                        <a href={`/docs/${first.slug}`} class="px-4 py-2 bg-[#f4a6b8] text-gray-900 text-sm font-medium rounded hover:bg-[#f0889f] transition-colors">
+                            Get started →
+                        </a>
+                    </div>
+                ) : (
+                    <p class="text-white/30 text-sm">No documentation found.</p>
+                )}
+            </main>
+
+        </div>
+    </div>
+    <Footer />
+</Layout>

@@ -1,0 +1,9 @@
+{
+  "title": "Vim Keybindings",
+  "description": "Complete keyboard shortcut reference for Micronote's Vim-native interface.",
+  "publishedAt": "2026-08-30",
+  "draft": false,
+  "lang": "en",
+  "tags": ["docs"],
+  "order": 3
+}

@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/index/header.astro";
+import Footer from "../components/index/footer.astro";
+import { Apple, Github, Terminal, FolderOpen } from "lucide-astro";
+---
+
+<Layout>
+    <Header />
+    <main class="bg-gray-900 min-h-screen flex flex-col items-center">
+
+        <!-- Hero -->
+        <div class="w-full px-8 pt-24 pb-16 flex flex-col items-center gap-6 max-w-[640px] text-center">
+            <img src="/appicon.png" alt="Micronote" class="w-20 h-20 rounded-[22%] shadow-xl shadow-black/40" />
+            <div class="flex flex-col gap-2">
+                <h1 class="text-4xl font-bold text-white">Download Micronote</h1>
+                <p class="text-white/50 text-base">Local-first. Vim-native. Free and open source.</p>
+            </div>
+
+            <a
+                href="#"
+                class="mt-2 flex items-center gap-2 px-6 py-3 bg-[#f4a6b8] text-gray-900 font-semibold rounded-lg hover:bg-[#f0889f] transition-colors text-sm"
+            >
+                <Apple size={18} />
+                Download for macOS
+            </a>
+            <p class="text-white/30 text-xs">Requires macOS 13 Ventura or later</p>
+        </div>
+
+        <!-- Install steps -->
+        <div class="w-full px-8 py-12 border-t border-white/8 flex flex-col gap-8 max-w-[560px]">
+            <h2 class="text-sm font-semibold text-white/40 uppercase tracking-wider">Installation</h2>
+            <ol class="flex flex-col gap-6">
+                <li class="flex items-start gap-4">
+                    <span class="text-[#f4a6b8] font-mono text-xs pt-0.5 w-5 shrink-0">01</span>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-white text-sm font-medium">Download the DMG</span>
+                        <span class="text-white/40 text-sm">Click the button above to download <code class="font-mono text-[#f4a6b8]">Micronote.dmg</code>.</span>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <span class="text-[#f4a6b8] font-mono text-xs pt-0.5 w-5 shrink-0">02</span>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-white text-sm font-medium">Install the app</span>
+                        <span class="text-white/40 text-sm">Open the DMG and drag <code class="font-mono text-[#f4a6b8]">Micronote.app</code> to your Applications folder.</span>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <span class="text-[#f4a6b8] font-mono text-xs pt-0.5 w-5 shrink-0">03</span>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-white text-sm font-medium">First launch</span>
+                        <span class="text-white/40 text-sm">If macOS shows a Gatekeeper warning, right-click the app and choose Open.</span>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <!-- Alternatives -->
+        <div class="w-full px-8 py-12 border-t border-white/8 flex flex-col gap-6 max-w-[560px]">
+            <h2 class="text-sm font-semibold text-white/40 uppercase tracking-wider">Other options</h2>
+            <div class="flex flex-col gap-3">
+                <a
+                    href="https://github.com/micronote-dev/micronote/releases"
+                    class="flex items-center gap-4 px-4 py-4 rounded-xl border border-white/8 hover:border-white/20 hover:bg-white/4 transition-colors"
+                >
+                    <Github size={20} class="text-white/50 shrink-0" />
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-white text-sm font-medium">GitHub Releases</span>
+                        <span class="text-white/40 text-xs">Previous versions and changelogs</span>
+                    </div>
+                </a>
+                <a
+                    href="https://github.com/micronote-dev/micronote"
+                    class="flex items-center gap-4 px-4 py-4 rounded-xl border border-white/8 hover:border-white/20 hover:bg-white/4 transition-colors"
+                >
+                    <Terminal size={20} class="text-white/50 shrink-0" />
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-white text-sm font-medium">Build from source</span>
+                        <span class="text-white/40 text-xs">For developers. Follow the README instructions.</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </main>
+    <Footer />
+</Layout>
