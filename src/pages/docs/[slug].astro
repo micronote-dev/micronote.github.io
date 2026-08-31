@@ -1,0 +1,77 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/index/header.astro";
+import Footer from "../../components/index/footer.astro";
+import { getAllDocs } from "../../lib/docs";
+import { marked } from "marked";
+
+export async function getStaticPaths() {
+    const docs = await getAllDocs();
+    return docs.map((doc) => ({
+        params: { slug: doc.slug },
+        props: { doc, docs },
+    }));
+}
+
+const { doc, docs } = Astro.props;
+const html = marked(doc.content);
+---
+
+<Layout>
+    <Header />
+    <div class="bg-gray-900 min-h-screen flex flex-col">
+        <div class="flex flex-1 max-w-[1100px] mx-auto w-full">
+
+            <!-- Sidebar -->
+            <aside class="w-56 shrink-0 border-r border-white/8 py-10 px-4 sticky top-0 h-screen overflow-y-auto">
+                <p class="text-white/30 text-xs font-semibold uppercase tracking-wider px-2 mb-3">Documentation</p>
+                <nav class="flex flex-col gap-0.5">
+                    {docs.map((d) => (
+                        <a
+                            href={`/docs/${d.slug}`}
+                            class:list={[
+                                "px-2 py-1.5 rounded-md text-sm transition-colors",
+                                d.slug === doc.slug
+                                    ? "bg-white/8 text-white"
+                                    : "text-white/50 hover:text-white hover:bg-white/5",
+                            ]}
+                        >
+                            {d.meta.title}
+                        </a>
+                    ))}
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <main class="flex-1 px-12 py-10 max-w-[720px]">
+                <article class="prose" set:html={html} />
+            </main>
+
+        </div>
+    </div>
+    <Footer />
+</Layout>
+
+<style is:global>
+    .prose {
+        color: rgba(255,255,255,0.8);
+        font-size: 0.9375rem;
+        line-height: 1.75;
+    }
+    .prose h1 { color: #fff; font-size: 1.75rem; font-weight: 700; margin: 0 0 1.5rem; }
+    .prose h2 { color: #fff; font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem; }
+    .prose h3 { color: #fff; font-size: 1rem; font-weight: 600; margin: 2rem 0 0.5rem; }
+    .prose p { margin: 0 0 1rem; }
+    .prose a { color: #f4a6b8; text-decoration: underline; text-underline-offset: 3px; }
+    .prose a:hover { color: #f0889f; }
+    .prose code { font-family: ui-monospace, monospace; font-size: 0.875em; color: #f4a6b8; background: rgba(255,255,255,0.06); padding: 0.15em 0.4em; border-radius: 4px; }
+    .prose pre { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1rem 1.25rem; overflow-x: auto; margin: 1.25rem 0; }
+    .prose pre code { background: none; padding: 0; color: rgba(255,255,255,0.7); font-size: 0.875rem; }
+    .prose ul { list-style: disc; padding-left: 1.5rem; margin: 0 0 1rem; }
+    .prose ol { list-style: decimal; padding-left: 1.5rem; margin: 0 0 1rem; }
+    .prose li { margin: 0.25rem 0; }
+    .prose table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.875rem; }
+    .prose th { text-align: left; color: rgba(255,255,255,0.4); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.5rem 1rem 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .prose td { padding: 0.6rem 1rem 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .prose strong { color: #fff; font-weight: 600; }
+</style>
