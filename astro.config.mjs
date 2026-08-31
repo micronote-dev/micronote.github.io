@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://micronote.github.io',
+  site: 'https://micronote-dev.github.io',
   vite: {
     plugins: [tailwindcss()]
   }
